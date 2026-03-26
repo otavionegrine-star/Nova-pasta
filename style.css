@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #050505;
+    overflow: hidden;
+}
+
+.cenario {
+    position: relative;
+    width: 600px;
+    height: 400px;
+}
+
+.mastro {
+    position: absolute;
+    left: 100px;
+    bottom: 0;
+    width: 12px;
+    height: 100%;
+    background: linear-gradient(to right, #222, #555, #222);
+    border-radius: 6px;
+    z-index: 1;
+}
+
+.flag-container {
+    position: absolute;
+    left: 112px;
+    top: 50px;
+    width: 300px;
+    height: 180px;
+    cursor: pointer;
+    z-index: 2;
+    transform-origin: top left;
+}
+
+/* Bandeira e Vento */
+.flag {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    animation: wave 3s ease-in-out infinite;
+    position: relative;
+    transition: filter 2s;
+}
+
+.blue-square {
+    position: absolute;
+    width: 40%;
+    height: 53.8%;
+    background: #002868;
+    z-index: 3;
+}
+
+.stripes { display: flex; flex-direction: column; height: 100%; }
+.stripes div { flex: 1; }
+.red { background: #BF0A30; }
+.white { background: #fff; }
+
+@keyframes wave {
+    0%, 100% { transform: skewY(0deg); }
+    50% { transform: skewY(3deg) scaleX(0.97); }
+}
+
+/* Efeito de Queima (ativado pelo JS) */
+.burning .flag {
+    filter: brightness(0.2) grayscale(0.5) blur(1px);
+    mask-image: linear-gradient(to top, transparent 15%, black 85%);
+    -webkit-mask-image: linear-gradient(to top, transparent 15%, black 85%);
+}
+
+/* Fogo */
+.fire-wrapper {
+    position: absolute;
+    bottom: -10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    opacity: 0;
+}
+
+.burning .fire-wrapper { opacity: 1; transition: opacity 0.5s; }
+
+.flame {
+    width: 50px;
+    height: 80px;
+    background: radial-gradient(ellipse at bottom, #ffea00, #ff7b00, transparent 70%);
+    filter: blur(4px);
+    animation: rise 0.6s infinite alternate;
+    mix-blend-mode: screen;
+}
+
+@keyframes rise {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(-25px) scale(1.2); }
+}
+
+/* Queda Final */
+.falling {
+    animation: despencar 2.5s forwards ease-in !important;
+}
+
+@keyframes despencar {
+    0% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(35deg) translateY(20px); }
+    100% { transform: rotate(110deg) translateY(120vh) translateX(-200px); opacity: 0; }
+}
+
+/* Faíscas Estilo */
+.spark {
+    position: absolute;
+    background: #ffa000;
+    border-radius: 50%;
+    box-shadow: 0 0 5px #ff5722;
+}
